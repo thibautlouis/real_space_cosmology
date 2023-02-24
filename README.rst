@@ -1,4 +1,4 @@
-real space cosmology
+Real space cosmology
 ====
 .. inclusion-marker-do-not-remove
 This github repo contains tools to visualize cosmological phenomena in real space.
