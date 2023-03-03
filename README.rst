@@ -6,3 +6,8 @@ It is heavily inspired from the real space interface distributed with ``CLASS`` 
 
 
 
+.. code:: shell
+
+    python hankle.py global.dict
+    python make_movies.py global.dict
+    python make_movies_2d.py global.dict

@@ -1,0 +1,12 @@
+species = ["baryons", "cdm", "photons"]
+
+gauge = "synchronous"
+divide_by_k2 = True
+kmax = 1000
+log10a_ini = -6
+log10a_final = 0
+n_a = 100
+
+sigma_pert = 10
+params = {"ombh2": 0.0224, "omch2": 0.120, "H0":67.556, "omk":0}
+lineplot = {"baryons": ["C0","-"], "cdm": ["purple", "-"],  "photons": ["red", "--"]}
