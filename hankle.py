@@ -1,8 +1,6 @@
 import numpy as np
-import pylab as plt
 import os, sys
 from scipy.interpolate import InterpolatedUnivariateSpline
-
 import hankl
 import initial_conditions
 import pickle

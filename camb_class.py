@@ -1,15 +1,6 @@
 import numpy as np
-import hankl
-import pylab as plt
 from classy import Class
-import initial_conditions
-import plot_utils
-import tf_tools
-import os
 from scipy.interpolate import InterpolatedUnivariateSpline
-from matplotlib.animation import FuncAnimation
-import pickle
-import time
 import camb
 
 
