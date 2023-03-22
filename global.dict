@@ -1,5 +1,7 @@
 species = ["baryons", "cdm", "photons"]
 
+
+run_name = "no_dm"
 gauge = "synchronous"
 divide_by_k2 = True
 kmax = 1000
@@ -8,5 +10,12 @@ log10a_final = 0
 n_a = 100
 
 sigma_pert = 10
-params = {"ombh2": 0.0224, "omch2": 0.120, "H0":67.556, "omk":0}
-lineplot = {"baryons": ["C0","-"], "cdm": ["purple", "-"],  "photons": ["red", "--"]}
+params_lcdm = {"ombh2": 0.0224, "omch2": 0.120, "H0":67.556, "omk":0, "As":20.9680*1e-10, "ns":0.9652}
+params_no_dm =  {"ombh2": 0.0224, "omch2": 0.00001, "H0":67.556, "omk":0, "As":20.9680*1e-10, "ns":0.9652}
+params_no_dm_high_baryons  = {"ombh2": 0.14239, "omch2": 0.00001, "H0":67.556, "omk":0, "As":20.9680*1e-10, "ns":0.9652}
+
+
+
+lineplot = {"baryons": ["C0","-"], "cdm": ["purple", "-."],  "photons": ["red", (0, (5,10))],  "neutrinos": ["orange", "-"]}
+
+

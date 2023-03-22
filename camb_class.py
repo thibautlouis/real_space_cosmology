@@ -45,11 +45,12 @@ def get_tf_class(params, species, redshifts, kmax=100, gauge="synchronous"):
         "omega_b": params["ombh2"],
         "omega_cdm": params["omch2"],
         "Omega_k": params["omk"],
+        "YHe": 0.245,
         "output": "mTk, vTk",
         "gauge": gauge,
         "evolver": "1",
         "P_k_max_h/Mpc": kmax,
-        "k_per_decade_for_pk": 100,
+        "k_per_decade_for_pk": 1000,
         "z_max_pk": np.max(redshifts),
     }
     
@@ -59,6 +60,7 @@ def get_tf_class(params, species, redshifts, kmax=100, gauge="synchronous"):
     class_convention["cdm"] = "d_cdm"
     class_convention["neutrinos"] = "d_ur"
     class_convention["psi"] = "psi"
+    class_convention["phi"] = "phi"
     class_convention["theta_photons"] = "t_g"
     class_convention["theta_baryons"] = "t_b"
     class_convention["theta_cdm"] = "t_cdm"
@@ -69,6 +71,7 @@ def get_tf_class(params, species, redshifts, kmax=100, gauge="synchronous"):
 
     for specy in species:
         species_delta_class += [class_convention[specy]]
+        if specy == "psi" or specy == "phi": continue
         species_v_class += [class_convention["theta_"+ specy]]
 
     cosmo.set(cosmo_parameters)
@@ -88,6 +91,7 @@ def get_tf_class(params, species, redshifts, kmax=100, gauge="synchronous"):
         for j, s in enumerate(species):
             evolution_delta[:, i, j] = output_data[i][species_delta_class[j]]
             if (s == "cdm") & (gauge == "synchronous"): continue # cdm has zero velocity in synchronous gauge
+            if s == "psi" or s == "phi": continue
             evolution_v[:, i, j] = output_data[i][species_v_class[j]]
 
     
@@ -107,6 +111,7 @@ def get_eta_and_rs(params, z):
           "omega_b": params["ombh2"],
           "omega_cdm": params["omch2"],
           "Omega_k": params["omk"],
+          "YHe": 0.245,
       }
       
     cosmo.set(cosmo_parameters)
