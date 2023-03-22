@@ -98,11 +98,6 @@ def get_tf_class(params, species, redshifts, kmax=100, gauge="synchronous"):
     return k, evolution_delta, evolution_v
 
         
-
-
-
-
-
 def get_eta_and_rs(params, z):
 
     cosmo = Class()
@@ -125,3 +120,44 @@ def get_eta_and_rs(params, z):
     sound_horizon_interp = InterpolatedUnivariateSpline(z_class[::-1], sound_horizon[::-1])
     return eta_interp(z), sound_horizon_interp(z)
 
+
+def get_cl_and_pk_camb(params):
+
+    pars = camb.CAMBparams()
+    pars_cosmo = {"ombh2": params["ombh2"],
+                  "omch2": params["omch2"],
+                  "omk": params["omk"],
+                 }
+    pars.set_cosmology(H0=params["H0"], **pars_cosmo)
+    pars.InitPower.set_params(As=params["As"], ns=params["ns"])
+    pars.set_matter_power(redshifts=[0], kmax=2.0)
+    pars.NonLinear = camb.model.NonLinear_none
+    pars.set_for_lmax(2500, lens_potential_accuracy=1)
+    
+    results = camb.get_results(pars)
+    powers = results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    totCL = powers['total']
+    
+    
+    ls = np.arange(totCL.shape[0])
+    TT, EE, BB, TE = totCL[:, 0], totCL[:, 1], totCL[:, 2], totCL[:, 3]
+    
+    kh, z, pk = results.get_matter_power_spectrum(minkh=1e-4, maxkh=1, npoints = 200)
+
+    cl_lens = results.get_lens_potential_cls(2500)
+    l_lens = np.arange(2, cl_lens[:,0].size)
+    phiphi = cl_lens[2:,0]
+    
+
+    out = {"ls": ls,
+              "TT": TT,
+              "EE": EE,
+              "BB": BB,
+              "TE": TE,
+              "kh": kh,
+              "pk": pk[0],
+              "l_lens": l_lens,
+              "cl_lens": phiphi}
+    
+    return out
+    
