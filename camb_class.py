@@ -2,16 +2,17 @@ import numpy as np
 from classy import Class
 from scipy.interpolate import InterpolatedUnivariateSpline
 import camb
+import camb.correlations
+import hankl
 
 
 
-
-
-def get_tf_camb(params, species, redshifts, kmax=100, kmin=10**-6, nk=1024):
+def get_tf_camb(params, species, redshifts, kmax=100, kmin=10**-6, nk=4096):
 
     camb_convention = {}
     camb_convention["photons"] = "delta_photon"
     camb_convention["baryons"] = "delta_baryon"
+    camb_convention["tot"] = "delta_tot"
     camb_convention["cdm"] = "delta_cdm"
     camb_convention["neutrinos"] = "delta_neutrino"
 
@@ -30,7 +31,7 @@ def get_tf_camb(params, species, redshifts, kmax=100, kmin=10**-6, nk=1024):
     data = camb.get_transfer_functions(pars)
 
     ks = 10 ** np.linspace(np.log10(kmin), np.log10(kmax), nk)
-    ks *= H0 / 100
+    ks *= params["H0"] / 100
 
     evolution = data.get_redshift_evolution(ks, redshifts, species_camb, lAccuracyBoost=accuracy)
     # return an array nk, nz, nspecies
@@ -55,12 +56,14 @@ def get_tf_class(params, species, redshifts, kmax=100, gauge="synchronous"):
     }
     
     class_convention = {}
+    class_convention["tot"] = "d_tot"
     class_convention["photons"] = "d_g"
     class_convention["baryons"] = "d_b"
     class_convention["cdm"] = "d_cdm"
     class_convention["neutrinos"] = "d_ur"
     class_convention["psi"] = "psi"
     class_convention["phi"] = "phi"
+    class_convention["theta_tot"] = "t_tot"
     class_convention["theta_photons"] = "t_g"
     class_convention["theta_baryons"] = "t_b"
     class_convention["theta_cdm"] = "t_cdm"
@@ -121,43 +124,83 @@ def get_eta_and_rs(params, z):
     return eta_interp(z), sound_horizon_interp(z)
 
 
-def get_cl_and_pk_camb(params):
+def get_cl_and_pk_camb(params, lmax=2500, kmax=10):
 
     pars = camb.CAMBparams()
     pars_cosmo = {"ombh2": params["ombh2"],
                   "omch2": params["omch2"],
                   "omk": params["omk"],
                  }
+                 
+    accuracy = 3
+    pars.set_accuracy(AccuracyBoost=accuracy, lAccuracyBoost=accuracy)
     pars.set_cosmology(H0=params["H0"], **pars_cosmo)
     pars.InitPower.set_params(As=params["As"], ns=params["ns"])
-    pars.set_matter_power(redshifts=[0], kmax=2.0)
+    pars.set_matter_power(redshifts=[0], kmax=kmax)
     pars.NonLinear = camb.model.NonLinear_none
-    pars.set_for_lmax(2500, lens_potential_accuracy=1)
+    pars.set_for_lmax(lmax, lens_potential_accuracy=1)
     
     results = camb.get_results(pars)
     powers = results.get_cmb_power_spectra(pars, CMB_unit='muK')
     totCL = powers['total']
     
-    
+    print(totCL.shape)
     ls = np.arange(totCL.shape[0])
     TT, EE, BB, TE = totCL[:, 0], totCL[:, 1], totCL[:, 2], totCL[:, 3]
     
-    kh, z, pk = results.get_matter_power_spectrum(minkh=1e-4, maxkh=1, npoints = 200)
-
-    cl_lens = results.get_lens_potential_cls(2500)
+    # also get the CMB correlation function
+    theta = np.linspace(0.0001, 10, 10000)
+    xvals = np.cos(theta * np.pi / 180)
+    corr = camb.correlations.cl2corr(totCL, xvals, lmax)
+    xi_cmb = corr[:,0] / corr[0,0]
+    
+    kh, z, pk = results.get_matter_power_spectrum(minkh=1e-4, maxkh=kmax, npoints = 1000)
+    h = params["H0"] / 100
+    k = kh * h
+    
+    # need to provide hankle with cst interval in logspace
+    pk_int = InterpolatedUnivariateSpline(k, pk)
+    kmin, kmax = np.min(k), np.max(k)
+    ks = 10**np.linspace(np.log10(kmin), np.log10(kmax), 1024)
+    
+    r, xi = hankl.P2xi(ks, pk_int(ks), 0, n=0, lowring=False, ext=0, range=None, return_ext=False)
+    xi = xi / xi[0]
+    
+    
+    # and the large scale structure correlation function
+    cl_lens = results.get_lens_potential_cls(lmax)
     l_lens = np.arange(2, cl_lens[:,0].size)
     phiphi = cl_lens[2:,0]
     
-
     out = {"ls": ls,
-              "TT": TT,
-              "EE": EE,
-              "BB": BB,
-              "TE": TE,
-              "kh": kh,
-              "pk": pk[0],
-              "l_lens": l_lens,
-              "cl_lens": phiphi}
-    
+           "TT": TT,
+           "EE": EE,
+           "BB": BB,
+           "TE": TE,
+           "kh": kh,
+           "pk": pk[0],
+           "l_lens": l_lens,
+           "cl_lens": phiphi,
+           "theta": theta,
+           "xi_cmb": xi_cmb,
+           "r": r,
+           "xi": xi}
+
     return out
     
+def compute_pk_from_ini_and_TF(params, specy, redshift):
+
+    k, evolution_delta, _ = get_tf_class(params, [specy], [redshift], kmax=10, gauge="synchronous")
+    Tf = evolution_delta[:,0,0]
+   # k, evolution_delta = get_tf_camb(params, [specy], [redshift], kmax=10, kmin=10**-4#)
+    #import pylab as plt
+    #plt.plot(k_class, evolution_delta_class[:,0,0])
+    #plt.plot(k_camb, evolution_delta_camb[:,0,0])
+    #plt.show()
+    
+    pk_init = params["As"] * (k / (0.05)) ** (params["ns"] - 1) * (2 * np.pi ** 2 / k ** 3) #initial condition given in term of R
+    pk = pk_init * Tf ** 2
+    h = params["H0"]/100
+    kh, pk, pk_init = k/h, pk * h ** 3, pk_init * h ** 3 # make k in h^{-1}Mpc and Pk in h^{3} Mpc
+    
+    return kh, pk_init, Tf,  pk
