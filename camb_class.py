@@ -204,3 +204,21 @@ def compute_pk_from_ini_and_TF(params, specy, redshift):
     kh, pk, pk_init = k/h, pk * h ** 3, pk_init * h ** 3 # make k in h^{-1}Mpc and Pk in h^{3} Mpc
     
     return kh, pk_init, Tf,  pk
+
+def get_thermo_class(params):
+
+    cosmo = Class()
+    cosmo_parameters = {
+          "h": params["H0"] / 100,
+          "omega_b": params["ombh2"],
+          "omega_cdm": params["omch2"],
+          "Omega_k": params["omk"],
+          "YHe": 0.245,
+          "thermodynamics_verbose": 1}
+    cosmo.set(cosmo_parameters)
+
+    cosmo.compute()
+    derived = cosmo.get_current_derived_parameters(["tau_rec", "conformal_age"])
+    thermo = cosmo.get_thermodynamics()
+    print(thermo.keys())
+
