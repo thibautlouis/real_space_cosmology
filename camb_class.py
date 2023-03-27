@@ -4,6 +4,8 @@ from scipy.interpolate import InterpolatedUnivariateSpline
 import camb
 import camb.correlations
 import hankl
+from camb.symbolic import *
+from IPython.display import display
 
 
 
@@ -124,6 +126,26 @@ def get_eta_and_rs(params, z):
     return eta_interp(z), sound_horizon_interp(z)
 
 
+def get_cls(params, lmax=2500, accuracy=1):
+    pars = camb.CAMBparams()
+    pars_cosmo = {"ombh2": params["ombh2"],
+                  "omch2": params["omch2"],
+                  "omk": params["omk"],
+                 }
+                 
+    pars.set_accuracy(AccuracyBoost=accuracy, lAccuracyBoost=accuracy)
+    pars.set_cosmology(H0=params["H0"], **pars_cosmo)
+    pars.InitPower.set_params(As=params["As"], ns=params["ns"])
+    pars.set_for_lmax(lmax, lens_potential_accuracy=1)
+    
+    results = camb.get_results(pars)
+    powers = results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    totCL = powers['unlensed_scalar']
+    ls = np.arange(totCL.shape[0])
+    TT, EE, BB, TE = totCL[:, 0], totCL[:, 1], totCL[:, 2], totCL[:, 3]
+
+    return ls, TT, EE, BB, TE
+
 def get_cl_and_pk_camb(params, lmax=2500, kmax=10):
 
     pars = camb.CAMBparams()
@@ -221,4 +243,41 @@ def get_thermo_class(params):
     derived = cosmo.get_current_derived_parameters(["tau_rec", "conformal_age"])
     thermo = cosmo.get_thermodynamics()
     print(thermo.keys())
+
+
+def decompose_cls_camb(params, lmax=2500, accuracy=1):
+
+    pars = camb.CAMBparams()
+    pars_cosmo = {"ombh2": params["ombh2"],
+                  "omch2": params["omch2"],
+                  "omk": params["omk"],
+                 }
+
+    pars.set_accuracy(AccuracyBoost=accuracy, lAccuracyBoost=accuracy)
+    pars.set_cosmology(H0=params["H0"], **pars_cosmo)
+    pars.InitPower.set_params(As=params["As"], ns=params["ns"])
+    pars.set_for_lmax(lmax, lens_potential_accuracy=1)
+    monopole_source, ISW, doppler, quadrupole_source = get_scalar_temperature_sources()
+
+    early_ISW = sympy.Piecewise( (ISW, 1/a - 1 > 30),(0, True))  #redshift > 30
+    late_ISW = ISW - early_ISW
+
+    names = ["dg", "psi", "mon", "ISW", "eISW", "LISW", "dop", "Q"]
+    
+    dg = make_frame_invariant(Delta_g / 4 * visibility, frame='Newtonian')
+    psi = make_frame_invariant(Psi_N * visibility, frame='Newtonian')
+
+
+    pars.set_custom_scalar_sources([dg, psi, monopole_source, ISW,early_ISW, late_ISW, doppler, quadrupole_source], source_names=names)
+    data= camb.get_results(pars)
+    dict = data.get_cmb_unlensed_scalar_array_dict(CMB_unit="muK")
+    
+    
+    # also decompose the monopole into its two contribution
+    display('Temperature monopole source in Newtonian gauge', newtonian_gauge(monopole_source))
+    display('Doppler source in Newtonian gauge', newtonian_gauge(doppler))
+    display('ISW source in Newtonian gauge', newtonian_gauge(ISW))
+
+
+    return dict
 
