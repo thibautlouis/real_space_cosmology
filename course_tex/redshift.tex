@@ -1,0 +1,759 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{graphicx,wrapfig,subfigure,amsmath,amssymb,epsfig,bm}
+\usepackage{listings,textcomp,color,geometry}
+\geometry{hmargin=2cm, vmargin=2cm}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath}
+
+\def\Box{\mathord{\dalemb{7.9}{8}\hbox{\hskip1pt}}}
+\def\dalemb#1#2{{\vbox{\hrule height.#2pt
+        \hbox{\vrule width.#2pt height#1pt \kern#1pt \vrule width.#2pt}
+        \hrule height.#2pt}}}
+
+\def\eop{\mathcal{E}}
+\def\bop{\mathcal{B}}
+\def\ba{\begin{eqnarray}}
+\def\ea{\end{eqnarray}}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\tr{{\rm tr}}
+\def\Var{{\rm Var}}
+\def\gtorder{\mathrel{\raise.3ex\hbox{$>$}\mkern-14mu
+             \lower0.6ex\hbox{$\sim$}}}
+\def\ltorder{\mathrel{\raise.3ex\hbox{$<$}\mkern-14mu
+             \lower0.6ex\hbox{$\sim$}}}
+
+\def\bb{{\mathfrak b}}
+\newcommand{\ellb }{\boldsymbol{\ell }}
+
+\definecolor{denim}{rgb}{0.08, 0.38, 0.74}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+
+% Personal colors defined here
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\green}[1]{{\color{ForestGreen}#1}}
+\newcommand{\cyan}[1]{{\color{Orange}#1}}
+\newcommand{\blue}[1]{{\color{denim}#1}}
+\newcommand{\assume}[1]{{\bf#1}}
+
+\begin{document}
+
+\title{A review on the H0 tension}
+\maketitle
+
+\section{Outline}
+
+let's divide the time between $t$ and $t_{0}$ into a set of n interval $\delta_{t}= (t-t_{0})/n$
+\ba
+\frac{dP_{\rm scatter}}{dt} &=&  n_{\rm e} c \sigma_{T}  = - \frac{d \tau}{d t}\\
+\tau &=& \int^{t_0}_{t}  n_{\rm e} c \sigma_{T} dt  \\
+P_{\rm no \ scatter} &=& (1- dP_{\rm scatter}\delta_{t})(1- dP_{\rm scatter}\delta_{t})... \\
+&=& \exp(- \tau) \\
+g(t) dt =  n_{\rm e} c \sigma_{T}   \exp(- \tau)  dt 
+\ea
+\ba
+e^{-} + \gamma \longleftrightarrow e^{-} + \gamma \\
+e^{-} + p \longleftrightarrow e^{-} + p \\
+\{\bm{x_{i}}, \bm{p_{i}} \} \\
+(\bm{x}, \bm{p})  \\
+\red{N(\bm{x}, \bm{p}, t) }= \green{f(\bm{x}, \bm{p}, t)}\blue{ (\Delta x)^{3} \frac{(\Delta p)^{3} }{(2\pi)^{3}}} \\
+\frac{df(\bm{x}, \bm{p}, t)}{dt}=0 \\
+\frac{df(\bm{x}, \bm{p}, t)}{dt}=C[f] \\
+\frac{\partial f(\bm{x}, \bm{p}, t)}{ \partial t} + \bm{\dot{x}}\nabla_{x}f(\bm{x}, \bm{p}, t) + \bm{\dot{p}}\nabla_{p}f(\bm{x}, \bm{p}, t) = 0 \\
+\frac{df(\bm{x}, \bm{p}, t)}{dt}= C[f] \\
+n_{s} (\bm{x},t) = g_{s}\int \frac{d^{3}p}{(2\pi)^{3}} f_{s}(\bm{x}, \bm{p}, t)  \\
+\rho_{s}(\bm{x},t) = g_{s}\int \frac{d^{3}p}{(2\pi)^{3}} f_{s}(\bm{x}, \bm{p}, t) E_{s}(p) \\
+E_{s}(p)= \sqrt{p^{2} + m^{2}_{s}} \\
+f(\bm{x}, \bm{p}, t) = f(p) = \frac{1}{e^{p/T}-1} \\
+n_{\gamma}(T_{\rm CMB}) &=& 2 \int \frac{d^{3}p}{(2\pi)^{3}} \frac{1}{e^{p/T_{\rm CMB}}-1} \nonumber  \\
+&=& \frac{8\pi T_{\rm CMB}^{3}}{(2\pi)^{3}} \int^{\infty}_{0} dx \frac{x^{2}}{e^{x}-1} =  \frac{\Gamma(3)\zeta(3) T_{\rm CMB}^{3}}{\pi^{2}} = \frac{2\zeta(3) T_{\rm CMB}^{3}}{\pi^{2}} \nonumber \\
+\rho_{\gamma}(T_{\rm CMB}) &=& 2 \int \frac{d^{3}p}{(2\pi)^{3}} \frac{p}{e^{p/T_{\rm CMB}}-1} \nonumber  \\
+&=& \frac{8\pi T_{\rm CMB}^{4}}{(2\pi)^{3}} \int^{\infty}_{0} dx \frac{x^{3}}{e^{x}-1}=  \frac{\Gamma(4)\zeta(4) T_{\rm CMB}^{4}}{\pi^{2}} = \frac{ \pi^{2}T_{\rm CMB}^{4}}{15}  \nonumber
+\ea
+
+\ba
+ds^{2} = -dt^{2} + a^{2} (dx^{2} + dy^{2} + dz^{2}) \\
+ds^{2} = a^{2}(\eta)(-d\eta^{2} + dx^{2} + dy^{2} + dz^{2}) \\
+d\eta = dt/a \\
+\bm{p} \longrightarrow P^{\mu} = \frac{dx^{\mu}}{d\lambda}
+\ea
+
+\ba
+\frac{df(x^{\mu}, P^{\mu})}{dt}=0 \\
+\ea
+
+\ba
+\frac{dp}{dt} = - Hp 
+\ea
+
+\ba
+\frac{\dot{p}}{p} &=& - \frac{\dot{a}}{a} \\
+d \ln(p)/dt &=& - d\ln(a)/dt \\
+\ln(p)  &=&  -\ln(a) + C = \ln(a^{-1}) + C \\
+p &\propto&  1/a
+\ea
+
+\ba
+H = \frac{\dot{a}}{a}
+\ea
+
+\ba
+P^{\mu} P_{\mu} = -m^{2} \\
+p^{2} = g_{ij}P^{i}P^{j} \\
+P^{\mu} =  \begin{pmatrix} 
+P^{0}  \cr
+P^{i} \cr
+ \end{pmatrix} 
+ =   \begin{pmatrix} 
+ \sqrt{p^{2} + m^{2}} \cr
+\frac{p}{a}\hat{p}^{i}\cr
+ \end{pmatrix} 
+\ea
+
+\ba
+\frac{df(x^{\mu}, p^{\mu})}{dt}= \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial t} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial x^{i}} \frac{dx^{i}}{dt} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial p} \frac{dp}{dt} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial \hat{p}_{i}} \frac{d\hat{p}_{i}}{dt}
+\ea
+
+
+\ba
+\frac{df(x^{\mu}, p^{\mu})}{dt}= \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial t} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial x^{i}} \frac{dx^{i}}{dt} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial p} \frac{dp}{dt} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial \hat{p}_{i}} \frac{d\hat{p}_{i}}{dt} = 0
+\ea
+
+\ba
+\frac{df(x^{\mu}, p^{\mu})}{dt}= \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial t} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial p} \frac{dp}{dt} 
+\ea
+
+\ba
+\frac{dP^{\mu}}{d\lambda} = - \Gamma^{\mu}_{\alpha, \beta} P^{\alpha}P^{\beta}
+\ea
+
+\ba
+ \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial t} + \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial p} \frac{dp}{dt}  &=& 0 \\
+ \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial t} - H p \frac{\partial f(x^{\mu}, p^{\mu})}{ \partial p} &=& 0
+ \ea
+
+\ba
+(\bm{x}, \hat{p})
+\ea
+
+
+
+\ba
+T_{z=0, \rm CMB} = \frac{T_{z=z_{\rm rec}, \rm CMB}}{1 +z_{\rm rec}} = 2.7 \ \rm K
+ \ea
+
+\ba
+g(t)dt &=& g(z)dz  \\
+g(z) &=& g(t) \frac{dt}{dz} = g(t) \frac{dt}{da}\frac{da}{dz} \\
+a &=& \frac{1}{1+z} \\
+da &=& - \frac{dz}{(1+z)^{2}}  \\
+g(z) &=&  - g(t) \frac{a^{2}}{\dot{a}} = 
+\ea
+
+
+\ba
+ \frac{\partial  \int \frac{d^{3}p}{(2\pi)^{3}} f}{ \partial t} - H   \int \frac{d^{3}p}{(2\pi)^{3}} p \frac{\partial f}{ \partial p} &=& 0 \\
+ \frac{\partial  n}{ \partial t} - H \int \frac{d^{2}\hat{p}}{(2\pi)^{3}} \int dp p^{3} \frac{\partial f}{ \partial p} &=& 0 \\
+ \frac{d  n}{ d t} + 3 H n &=& 0 \\
+n^{-1}  \frac{d  n}{ d t}  = - 3 a^{-1} \frac{d  a}{ d t}  \\
+ \frac{d \ln  n}{ d t}  = - 3 \frac{d  \ln a}{ d t}  \longrightarrow n \propto a^{-3}
+ \ea
+ 
+ \ba
+ \left(\frac{\delta T}{\bar{T}} + \psi \right) \bigg|_{\eta_{R}} = \left(\blue{\frac{1}{4}\delta_{\gamma}} + \red{\psi} \right)\bigg|_{\eta_{*}} + \green{\bm{e}{\bm u_{b}}} |_{\eta_{*}} + \cyan{\int_{\eta_{*}}^{\eta_{R}}(\dot{\psi} + \dot{\phi}) d\eta} \\
+\delta_{\gamma} = \frac{ \delta \rho_{\gamma}}{\rho_{\gamma}} \\
+\rho_{\gamma} \propto T^{4} \\
+\frac{\delta T}{T} = \frac{1}{4} \frac{ \delta \rho_{\gamma}}{\rho_{\gamma}}
+ \ea
+ 
+ 
+
+
+\ba
+\rho_{\gamma} \propto T^{4} \\
+\frac{\delta T}{T} = \frac{1}{4} \frac{ \delta \rho_{\gamma}}{\rho_{\gamma}}
+ \ea
+ 
+ \ba
+ \Theta = \frac{\delta T}{\bar{T}}
+ \ea
+ 
+ 
+ 
+ \ba
+ p + e^{-} \longrightarrow H + \gamma
+ \ea
+ 
+ \ba
+ g(t) dt = n_{e} c \sigma_{T} dt  \times P_{\rm no scatter}(t, t_{0})
+ \delta_{t}=\frac{(t_{0}-t)}{n}
+ \ea
+ 
+ \ba
+ \stackrel{n}{=}
+ \ea
+ 
+  
+ \ba
+ P_{\rm no scatter}(t, t_{0}) &=& \prod^{n}_{i=1} (1 - dP_{\rm scatter}(t_{i})\delta t) \sim \prod^{n}_{i=1}  e^{- dP_{\rm scatter}(t_{i})\delta t} \sim   e^{- \sum_{i=1}^{n} dP_{\rm scatter}(t_{i})\delta t} \\
+ & \stackrel{n \rightarrow \infty}{=}&   \exp \left(- \int^{t_{0}}_{t}  n_{e} c \sigma_{T} dt \right) =  \exp(-\tau) \nonumber 
+ \ea
+
+ 
+
+
+\ba
+\Theta_{0}(\bm{x}_{\rm LSS},t) = \frac{1}{4\pi} \int d\hat{p} \Theta (\hat{p}, \bm{x}_{\rm LSS},t) = \frac{1}{4} \delta_{\gamma}
+\ea
+
+\ba
+\Theta = \Theta(\bm{x}_{\rm Earth}, \hat{n}, t_{0})
+\ea
+
+ \ba
+{\bm v_{b}}, \delta_{\gamma}, \psi, \phi, \tau
+\ea
+
+\section{Dodelson equation for perturbation (new edition)}
+
+Fourier convention (page 120)
+\ba
+\delta(\bm{x}) &=& \int \frac{d^{3}k}{(2\pi)^{3}} e^{i\bm{k}\bm{x}} \tilde{\delta(\bm{k})} \\
+\tilde{\delta(\bm{k})} &=& \int d^{3}x e^{-i\bm{k}\bm{x}} \delta(\bm{x})
+\ea
+
+Metric (e.g 141)
+\ba
+ds^{2} = -(1 + 2\psi(\bm{x},t))dt^{2} + a^{2}(t)\delta_{ij}[1+2\phi(\bm{x},t)]dx^{i}dx^{j}
+\ea
+
+Note the difference with Challinor metric (ressource/challinor)
+\ba
+ds^{2} =  a^{2}(\eta) [ (1 + 2\psi)d\eta^{2} - ( 1- 2\phi)\delta_{ij}dx^{i}dx^{j} ] 
+\ea
+Apart from the signature of the metric, the sign of $\phi$ is opposite. \\
+I take the fondamental equation for CMB anisotropies from challinor slide 51 (or equation 20 of https://arxiv.org/pdf/0903.5158.pdf), just remplcing $\phi$ by -$\phi$ to be consistent
+with Dodelson notations.
+  \ba
+ \left(\Theta+ \psi \right) \bigg|_{\eta_{R}} = \left(\blue{\Theta_{0}} + \red{\psi} \right)\bigg|_{\eta_{*}} + \green{\bm{e}{\bm u_{b}}} |_{\eta_{*}} +  \cyan{2 \int_{\eta_{*}}^{\eta_{R}} \dot{\psi}  d\eta} \\
+\delta_{\gamma} = \frac{ \delta \rho_{\gamma}}{\rho_{\gamma}} 
+\ea
+and integrating along the line of sight
+\ba
+ \left(\Theta+ \psi \right) \bigg|_{\eta_{R}} = \int_{0}^{\eta_{R}} d\eta g(\eta) \left[\left(\Theta_{0}+ \psi \right)  + \bm{e}{\bm u_{b}}  \right] + 2 \int_{0}^{\eta_{R}} d\eta \exp(-\tau)  \dot{\psi}   \\
+\ea
+Simplifying, removing $\psi$ on the left:
+  \ba
+\Theta  \bigg|_{\eta_{R}} = \left(\blue{\Theta_{0}} + \red{\psi} \right)\bigg|_{\eta_{*}} + \green{\bm{e}{\bm u_{b}}} |_{\eta_{*}} +  \cyan{2 \int_{\eta_{*}}^{\eta_{R}} \dot{\psi}  d\eta} \\
+\delta_{\gamma} = \frac{ \delta \rho_{\gamma}}{\rho_{\gamma}} 
+\ea
+and integrating along the line of sight
+\ba
+ \Theta \bigg|_{\eta_{R}} = \int_{0}^{\eta_{R}} d\eta g(\eta) \left[\left(\Theta_{0}+ \psi \right)  + \bm{e}{\bm u_{b}}  \right] + 2 \int_{0}^{\eta_{R}} d\eta \exp(-\tau)  \dot{\psi}   \\
+\ea
+
+
+
+
+Poisson equation (page 145)
+\ba
+-\nabla^{2} \phi = 4\pi G a^{2} \delta \rho \\
+\phi = - \psi
+\ea
+
+Einstein Equation (page 154)
+\ba
+k^{2}\phi + 3 \frac{a'}{a}\left( \phi' - \psi \frac{a'}{a} \right) &=& 4\pi G a^{2} \left[ \rho_{c}\delta_{c} + \rho_{b}\delta_{b} + 4 \rho_{\gamma} \Theta_{0} + 4 \rho_{\nu} {\cal N}_{0}  \right] \\
+k^{2} (\phi + \psi) &=& - 32 \pi G a^{2} \rho_{r} \Theta_{r,2} \sim 0
+\ea
+in term of $\delta_{\gamma}$ and $\delta_{\nu}$
+\ba
+k^{2}\phi + 3 \frac{a'}{a}\left( \phi' - \psi \frac{a'}{a} \right) &=& 4\pi G a^{2} \left[ \rho_{c}\delta_{c} + \rho_{b}\delta_{b} + \rho_{\gamma} \delta_{\gamma} +  \rho_{\nu} \delta_{\nu} \right] \\
+k^{2} (\phi + \psi) &=& - 32 \pi G a^{2} \rho_{r} \Theta_{r,2} \sim 0
+\ea
+for the course we will use
+\ba
+k^{2}\phi + 3 \frac{a'}{a}\left( \phi' - \psi \frac{a'}{a} \right) &=& 4\pi G a^{2} \delta \rho \\
+k^{2} (\phi + \psi) \sim 0
+\ea
+
+\ba
+\delta \rho =  \rho_{c}\delta_{c} + \rho_{b}\delta_{b} + \rho_{\gamma} \delta_{\gamma} +  \rho_{\nu} \delta_{\nu} 
+\ea
+
+
+
+\ba
+f(\bm{x}, p, \hat{p}, t) = \frac{1}{\exp \left(\frac{p}{T(t)[1 + \Theta( \bm{x},  \hat{p}, t) } \right)-1 }
+\ea
+
+\ba
+f_{\gamma}(p ; T_{\rm CMB}) = \frac{1}{\exp \left(\frac{p}{T_{\rm CMB}} \right)-1 }
+\ea
+
+
+\ba
+\delta_{X}(\bm{x},t) = \frac{\rho_{X}(\bm{x},t) - \bar{\rho_{X}}}{ \bar{\rho_{X}}}
+\ea
+
+Boltzmann equation (page 132)
+\ba
+\Theta' + ik \mu \Theta &=& - \phi' - ik\mu\psi - \tau' \left[\Theta_{0} - \Theta + \mu u_{b} - \frac{1}{2} P_{2}{\mu} \Pi \right] \\
+\delta'_{c} +iku_{c} &=& - 3\phi^{'} \\
+u'_{c} + \frac{a'}{a} u_{c} &=& -ik \psi \\
+\delta'_{b} +iku_{b} &=& - 3\phi^{'} \\
+u'_{b} + \frac{a'}{a} u_{b} &=& -ik \psi + \frac{\tau'}{R}[u_{b} + 3i\Theta_{1}] \\
+{\cal N}' + ik \mu \frac{p}{E_{\nu}(p)}{\cal N} -H p \frac{\partial}{\partial p} {\cal N} &=& - \phi' - ik \mu \frac{E_{\nu}(p)}{p} \psi \\
+\ea
+
+\ba
+g_{\mu, \nu} P^{\mu} P^{\nu} &=& - m^{2} \\
+-(1+2\psi) (P^{0})^{2} + g_{ij}P^{i}P^{j} &=& -m^{2} \\
+-(1+2\psi) (P^{0})^{2} + p^{2} &=& -m^{2} \\
+P^{0} &=& \frac{\sqrt{m^{2} + p^{2}}}{\sqrt{1+2\psi}} \approx  \sqrt{m^{2} + p^{2}}(1-\psi) = E(1-\psi)
+\ea
+
+\ba
+\frac{dx^{i}}{dt} = \frac{dx^{i}}{d\lambda}\frac{d\lambda}{dt} = \frac{P^{i}}{P^{0}}
+\ea
+
+
+\ba
+\frac{dx^{i}}{dt} &=& \frac{p}{aE}(1-\phi + \psi)\hat{p}^{i} \\
+\frac{dp}{dt} &=& -  [H + \dot{\phi}]p - \frac{E}{a} \hat{p}^{i} \frac{\partial \psi}{\partial x^{i}}
+\ea
+
+\ba
+P^{i} = C p \hat{p}^{i} \\
+g_{ij}P^{i}P^{j} = p^{2} \\\
+a^{2}(t)\delta_{ij}[1+2\phi(\bm{x},t)]C^{2} p^{2} \hat{p}^{i} \hat{p}^{j}  = p^{2} \\
+C = \frac{1}{a\sqrt{(1+2\phi(\bm{x},t)}} = \frac{1}{a}(1-\phi)
+\ea
+
+
+some consideration on $\psi$ and $\phi$
+\ba
+\psi < 0 \\
+\phi = - \psi > 0 \\
+a^{2} => a^{2}(1- \phi)^{2} = a^{2} (1-2\phi) \\
+\ea
+
+\ba
+&&\frac{\partial f_{c}}{ \partial t} + \frac{\partial f_{c}}{ \partial x^{i}} \frac{dx^{i}}{dt} + \frac{\partial f_{c}}{ \partial p} \frac{dp}{dt}  = 0 \\
+&&\frac{\partial f_{c}}{ \partial t} + \frac{\partial f_{c}}{ \partial x^{i}} \frac{p}{aE}(1-\phi + \psi)\hat{p}^{i}  - \left[  (H + \dot{\phi})p + \frac{E}{a} \hat{p}^{i} \frac{\partial \psi}{\partial x^{i}}  \right]\frac{\partial f_{c}}{ \partial p}  = 0 \\
+&&\frac{\partial f_{c}}{ \partial t} + \frac{\partial f_{c}}{ \partial x^{i}} \frac{p}{aE}\hat{p}^{i}  - \left[  (H + \dot{\phi})p + \frac{E}{a} \hat{p}^{i} \frac{\partial \psi}{\partial x^{i}}  \right]\frac{\partial f_{c}}{ \partial p}  = 0
+\ea
+
+\ba
+\frac{\partial}{\partial t} \int \frac{d^{3}p}{(2\pi)^{3}} f_{c}   + \frac{1}{a} \frac{\partial}{ \partial x^{i}} \int \frac{d^{3}p}{(2\pi)^{3}} f_{c} \frac{p}{E(p)}\hat{p}^{i}  &-&   (H + \dot{\phi}) \int \frac{d^{3}p}{(2\pi)^{3}} p \frac{\partial f_{c}}{ \partial p}   \\
+&-& \frac{1}{a} \frac{\partial \psi}{\partial x^{i}} \int \frac{d^{3}p}{(2\pi)^{3}} \frac{\partial f_{c}}{ \partial p} E(p) \hat{p}^{i}    = 0 \nonumber \\
+\ea
+
+\ba
+&&\frac{\partial}{\partial t} \int \frac{d^{3}p}{(2\pi)^{3}} f_{c}   + \frac{1}{a} \frac{\partial}{ \partial x^{i}} \int \frac{d^{3}p}{(2\pi)^{3}} f_{c} \frac{p}{E(p)}\hat{p}^{i}  -   (H + \dot{\phi}) \int \frac{d^{3}p}{(2\pi)^{3}} p \frac{\partial f_{c}}{ \partial p}     = 0 \nonumber \\
+&&\frac{\partial n_{c}}{\partial t} + \frac{1}{a}  \frac{\partial}{ \partial x^{i}} \int \frac{d^{3}p}{(2\pi)^{3}} f_{c} \frac{p}{E(p)}\hat{p}^{i} + 3  (H + \dot{\phi}) n_{c} = 0 \\
+&&\frac{\partial n_{c}}{\partial t} + \frac{1}{a}  \frac{\partial}{ \partial x^{i}} (n_{c} u^{i}_{c}) + 3  (H + \dot{\phi}) n_{c} = 0
+\ea
+
+\ba
+u^{i}_{c} = \frac{1}{n_{c}} \int \frac{d^{3}p}{(2\pi)^{3}} f_{c} \frac{p}{E(p)}\hat{p}^{i}
+\ea
+
+\ba
+{\bm u}_{c}(\bm{x},t)
+\ea
+
+\ba
+n_{c}(\bm{x},t) = \bar{n}_{c}(t)[1+\delta_{c} (\bm{x},t)]
+\ea
+
+
+\ba
+&&  \frac{d \bar{n}_{c}}{ d t} + 3 H \bar{n}_{c} = 0 \\
+&&\frac{\partial \delta_{c}}{\partial t} + \frac{1}{a}  \frac{\partial u^{i}_{c}}{ \partial x^{i}}  + 3  \dot{\phi} = 0
+\ea
+
+\ba
+\frac{d^{3}p}{(2\pi)^{3}} p \frac{\hat{p}^{j}}{E}
+\ea
+
+\ba
+p/E 
+\ea
+
+\ba
+\frac{\partial }{ \partial t} \int \frac{d^{3}p}{(2\pi)^{3}} p \frac{\hat{p}^{j}}{E} f_{c}  &+& \frac{1}{a}  \frac{\partial}{ \partial x^{i}} \int \frac{d^{3}p}{(2\pi)^{3}} f_{c} \frac{p^{2}}{E(p)^{2}}\hat{p}^{i}\hat{p}^{j}   
+- (H + \dot{\phi})  \int \frac{d^{3}p}{(2\pi)^{3}} p^{2} \frac{\hat{p}^{j}}{E} \frac{\partial f_{c}}{ \partial p} \nonumber \\
+&-& \frac{1}{a} \frac{\partial \psi}{\partial x^{i}} \int \frac{d^{3}p}{(2\pi)^{3}} p \hat{p}^{j}  \hat{p}^{i}   \frac{\partial f_{c}}{ \partial p}  = 0
+\ea
+
+\ba
+\int \frac{d^{3}p}{(2\pi)^{3}} p^{2} \frac{\hat{p}^{j}}{E} \frac{\partial f_{c}}{ \partial p} =  \int  \frac{d\Omega}{(2\pi)^{3}}\hat{p}^{j} \int^{\infty}_{0} dp  \frac{\partial f_{c}}{ \partial p} \frac{p^{4}}{E}
+&=& 
+\ea
+
+\ba
+\frac{\partial (n_{c} u^{j}_{c})}{\partial t} + 4Hn_{c}u^{j}_{c} + \frac{n_{c}}{a} \frac{\partial \psi}{\partial x^{j}}= 0 \\
+\frac{\partial u^{j}_{c}}{\partial t} + Hu^{j}_{c} + \frac{1}{a} \frac{\partial \psi}{\partial x^{j}}= 0
+\ea
+
+\ba
+&&\frac{\partial f_{b}}{ \partial t} + \frac{\partial f_{b}}{ \partial x^{i}} \frac{p}{aE}\hat{p}^{i}  - \left[  (H + \dot{\phi})p + \frac{E}{a} \hat{p}^{i} \frac{\partial \psi}{\partial x^{i}}  \right]\frac{\partial f_{b}}{ \partial p}  = C[f_{b}, f_{\gamma}]
+\ea
+
+\ba
+&&  \frac{d \bar{n}_{b}}{ d t} + 3 H \bar{n}_{c} = 0 \\
+&&\frac{\partial \delta_{b}}{\partial t} + \frac{1}{a}  \frac{\partial u^{i}_{b}}{ \partial x^{i}}  + 3  \dot{\phi} = 0 \\
+&&\frac{\partial u^{j}_{b}}{\partial t} + Hu^{j}_{b} + \frac{1}{a} \frac{\partial \psi}{\partial x^{j}}=  \frac{4\rho_{\gamma}}{3\rho_{b}}n_{e}\sigma_{T}( u^{j}_{\gamma} -  u^{j}_{b}) \\
+&& u_{\gamma} = -3i\Theta_{1}
+\ea
+
+\ba
+P_{\cal R }(k)  = \frac{2\pi^{2}}{k^{3}} A_{s} \left( \frac{k}{k_{*}} \right)^{n_{s} -1 } \\
+n_{s} = 1 \\
+n_{s} < 1
+\ea
+
+\ba
+\delta_{b}(k,z) &=& T_{b}(k,z) \delta_{b}(k,z_{\rm ini})  \\
+\delta_{\gamma}(k,z) &=& T_{\gamma}(k,z) \delta_{\gamma}(k,z_{\rm ini}) \\
+\delta_{\rm dm}(k,z) &=& T_{\rm dm}(k,z) \delta_{\rm dm}(k,z_{\rm ini}) \\
+\psi(k,z) &=& T_{\rm \psi}(k,z)  \psi(k,z_{\rm ini}) 
+\ea
+
+
+\ba
+\delta_{b}(k,z) &=& T_{b}(k,z) \delta_{b}(k,z_{\rm ini})  \\
+\delta_{\rm dm}(k,z) &=& T_{\rm dm}(k,z) \delta_{\rm dm}(k,z_{\rm ini}) \\
+\psi(k,z) &=& T_{\rm \psi}(k,z)  \psi(k,z_{\rm ini}) 
+\ea
+
+
+
+\ba
+T_{X}(k,z)
+\ea
+
+\ba
+\psi_{\rm ini} &=& -\frac{3}{2} {\cal R} \\
+\delta_{\gamma, \rm ini } &=& -2\psi_{\rm ini} \\
+\delta_{b, \rm ini } &=& \delta_{\rm dm, \rm ini} =  \frac{3}{4} \delta_{\gamma, \rm ini } 
+\ea
+
+\ba
+\delta_{b}(k,z_{\rm ini}), \delta_{\gamma}(k,z_{\rm ini}), \delta_{\rm dm}(k,z_{\rm ini}), \psi_{\rm ini}
+\ea
+
+\ba
+A_{s}, n_{s}
+\ea
+\ba
+\delta_{m}(k,z) &=& T_{m}(k,z) \delta_{m}(k,z_{\rm ini})  \\
+P_{m}(k,z=0) &=& \langle \delta_{m}(k,z=0) \delta^{*}_{m}(k,z=0)  \rangle \\
+&=& T^{2}_{m}(k,z=0) \langle \delta_{m}(k,z_{\rm ini}) \delta_{m}(k,z_{\rm ini}) \rangle \\
+&=& T^{2}_{m}(k,z=0)  P_{\cal R }(k) 
+\ea
+
+\ba
+P_{m}(k,z)  = &=& T^{2}_{m}(k,z)  P_{\cal R }(k) 
+\ea
+
+\ba
+{\cal R}(\bm{k}) = \sqrt{P_{\cal R }(k)} {\cal G}_{0,1}(\bm{k}) 
+\ea
+
+\ba
+\xi(\bm{r}) &=&  \int d^{3}\bm{k} P(\bm{k}) e^{i \bm{k}. \bm{r}} \\
+\xi(r) &=&  4\pi \int dk P(k) j_{0}(kr) k^{2} dk
+\ea
+
+
+\ba
+\Theta(\bm{x}, \hat{p}, \eta) = \sum_{\ell=1}^{\infty} \sum^{\ell}_{m=-\ell} a_{\ell m }(\bm{x}, \eta) Y_{\ell m} (\hat{p}) \\
+a_{\ell m }(\bm{x}, \eta) = \int d\Omega Y^{*}_{\ell m} (\hat{p})\Theta(\bm{x}, \hat{p}, \eta)
+\ea
+
+
+\ba
+C_{\ell}(\bm{x}, \eta) = \langle a_{\ell m}(\bm{x}, \eta) a^{*}_{\ell m}(\bm{x}, \eta) \rangle
+\ea
+
+\ba
+a_{\ell m }(\bm{x}, \eta) = \int d\hat{p} \ Y^{*}_{\ell m} (\hat{p})\Theta(\bm{x}, \hat{p}, \eta) \\
+a_{\ell m }(\bm{x}, \eta) = \int \frac{d^{3}k}{(2\pi)^{3}} e^{i \bm{k}\bm{x}} \int d\hat{p} \ Y^{*}_{\ell m} (\hat{p})\Theta(\bm{k}, \hat{p}, \eta)
+\ea
+
+\ba
+\Theta(\bm{k}, \hat{p}, \eta_{R}) = {\cal T}(k, \mu = \hat{k} \ . \ \hat{p}) {\cal R}( \bm{k})
+\ea
+
+
+
+\ba
+\langle a_{\ell m }(\bm{x}, \eta_{R}) a^{*}_{\ell m }(\bm{x}, \eta_{R}) \rangle &=& \langle \int \frac{d^{3}k}{(2\pi)^{3}} e^{i \bm{k}\bm{x}} \int d\hat{p} \ Y^{*}_{\ell m} (\hat{p}){\cal T}(k, \hat{k} \ . \ \hat{p}) {\cal R}( \bm{k})  \nonumber \\
+													 	&\times& \int \frac{d^{3}k'}{(2\pi)^{3}} e^{-i \bm{k'}\bm{x}} \int d\hat{p}' \ Y_{\ell m} (\hat{p}') {\cal T}^{*}(k, \hat{k}' \ . \ \hat{p}') {\cal R}( \bm{k'}) \rangle  \nonumber \\
+\langle a_{\ell m }(\bm{x}, \eta_{R}) a^{*}_{\ell m }(\bm{x}, \eta_{R}) \rangle &=&  \int \frac{d^{3}k}{(2\pi)^{3}} P_{\cal R}(k) \int  d\hat{p} \ Y^{*}_{\ell m} (\hat{p}){\cal T}(k, \hat{k} \ . \ \hat{p}) \int  d\hat{p}' \ Y_{\ell m} (\hat{p}'){\cal T}^{*}(k, \hat{k}\ . \ \hat{p}')  \nonumber
+\ea
+
+\ba
+C_{\ell} &=&  \int \frac{d^{3}k}{(2\pi)^{3}} P_{\cal R}(k) \int d\hat{p} \ Y^{*}_{\ell m} (\hat{p}){\cal T}(k, \hat{k} \ . \ \hat{p}) \int d\hat{p}' \ Y_{\ell m} (\hat{p}){\cal T}^{*}(k, \hat{k} \ . \ \hat{p}') 
+\ea
+
+\ba
+\langle {\cal R}( \bm{k})  {\cal R}( \bm{k'})  \rangle = (2\pi)^{3} \delta( \bm{k}- \bm{k'}) P_{\cal R}(k)
+\ea 
+
+\ba
+{\cal T}(k, \hat{k}\ . \ \hat{p})  = \sum_{\ell} (-i)^{\ell} (2\ell + 1) P_{\ell}(\hat{k} \ . \ \hat{p}) {\cal T}_{\ell}(k)
+\ea
+
+\ba
+C_{\ell} &=& \int \frac{d^{3}k}{(2\pi)^{3}} P_{\cal R}(k) \sum_{\ell', \ell"} (-i)^{\ell'} (i)^{\ell"} (2\ell' + 1) (2\ell" + 1) {\cal T}_{\ell'}(k){\cal T}^{*}_{\ell"}(k) \\
+&\times& \int d\hat{p} \ Y^{*}_{\ell m} (\hat{p})  P_{\ell'}(\hat{k} \ . \ \hat{p})  \int d\hat{p}' \ Y_{\ell m} (\hat{p}')  P_{\ell"}(\hat{k} \ . \ \hat{p}')
+\ea
+
+
+\ba
+\blue{ \int d\hat{p} \ Y^{*}_{\ell m} (\hat{p})  P_{\ell'}(\hat{k} \ . \ \hat{p})  = \frac{4\pi Y^{*}_{\ell m} (\hat{k}) \delta_{\ell, \ell'}}{2\ell + 1 }}
+\ea
+
+\ba
+C_{\ell} &=& \frac{2}{\pi} \int_{0}^{\infty} dk k^{2} P_{\cal R}(k) |{\cal T}_{\ell}(k) |^{2} \int d\hat{k} Y_{\ell m} (\hat{k})  Y^{*}_{\ell m} (\hat{k})  \\
+C_{\ell} &=& \frac{2}{\pi} \int_{0}^{\infty} dk k^{2} P_{\cal R}(k) |{\cal T}_{\ell}(k) |^{2}
+\ea
+
+
+
+
+\ba
+\Theta' + ik \mu \Theta &=& - \phi' - ik\mu\psi - \tau' \left[\Theta_{0} - \Theta + \mu u_{b}  \right] \\
+\Theta' + (ik \mu -  \tau') \Theta &=& - \phi' - ik\mu\psi -  \tau' \left[\Theta_{0}  + \mu u_{b}  \right]  \\
+\Theta' + (ik \mu - \tau' ) \Theta &=& S(k, \mu, \eta) \\
+ e^{-(ik \mu \eta - \tau)}  \frac{d}{d\eta}(\Theta e^{ik \mu \eta - \tau})  &=& S(k, \mu, \eta) \\
+ \frac{d}{d\eta}(\Theta e^{ik \mu \eta - \tau})  &=&   e^{ik \mu \eta - \tau}  S(k, \mu, \eta) \\
+ \Theta(k, \mu, \eta_{R}) e^{ik \mu \eta_{R} - \tau(\eta_{R})} -   \Theta(k, \mu, 0) e^{- \tau(0)}  &=& \int_{0}^{\eta_{R}} e^{ik \mu \eta - \tau(\eta)} S(k, \mu, \eta) d\eta \\
+  \Theta(k, \mu, \eta_{R})&=& \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R})} S(k, \mu, \eta) e^{-\tau(\eta)} d\eta  
+\ea
+
+\ba
+  \Theta(k, \mu, \eta_{R})  &=&  \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R}) } [- \phi'  - \tau' \Theta_{0} ] e^{- \tau(\eta)}\\
+&+&  \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R})}( - ik\mu\psi  -  \tau'\mu u_{b}) e^{- \tau(\eta)} \\
+\ea
+\ba
+I_{2} &=& \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R})}( - ik\mu\psi  -  \tau'\mu u_{b}) e^{- \tau(\eta)} \\
+         &=& \int_{0}^{\eta_{R}} -ik\mu e^{ik \mu (\eta - \eta_{R}) } \left( \psi  -i  \frac{\tau' u_{b}}{k} \right)  e^{-\tau(\eta)}\\
+         &=& \int_{0}^{\eta_{R}} \left[-\frac{d}{d\eta} e^{ik \mu (\eta - \eta_{R})}\right] \left( \psi  -i  \frac{\tau' u_{b}}{k}\right)  e^{- \tau(\eta)} \\
+         &=& \left[-e^{ik \mu (\eta - \eta_{R})}( \psi  -i  \frac{\tau' u_{b}}{k})e^{- \tau(\eta)} \right]^{\eta_{R}}_{0} + \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R})} \frac{d}{d\eta} \left[\left( \psi  -i  \frac{\tau' u_{b}}{k}\right)  e^{- \tau(\eta)} \right]
+\ea
+
+\ba
+  \Theta(k, \mu, \eta_{R})  &=&  \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R}) } \left( \left[- \phi'  - \tau' \Theta_{0} \right] e^{- \tau(\eta)}  + \frac{d}{d\eta} \left[\left( \psi  -i  \frac{\tau' u_{b}}{k}\right)  e^{- \tau(\eta)} \right] \right) \nonumber \\
+  &=&  \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R}) } \left( \left[- \phi'  - \tau' \Theta_{0} \right] e^{- \tau(\eta)}  + \psi' e^{- \tau(\eta)}  - \tau' \psi e^{- \tau(\eta)} +  \frac{d}{d\eta} \left[\left(  -i  \frac{\tau' u_{b}}{k}\right)  e^{- \tau(\eta)} \right] \right)  \nonumber \\
+   &=& \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R}) }  \left[ \Theta_{0} + \psi \right] g(\eta) \\
+   &+& \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R}) } \frac{i}{k} \frac{d}{d\eta} \left[\left(  g(\eta) u_{b}\right)  \right]  \\
+   &+&  \int_{0}^{\eta_{R}} e^{ik \mu (\eta - \eta_{R}) }  \left[- \phi'  +\psi' \right]  e^{- \tau(\eta)} \\
+         \ea
+
+\ba
+  \Theta_{\ell}(k, \eta_{R})&=& \frac{1}{(-i)^{\ell}} \int_{-1}^{1}  \frac{d\mu}{2} P_{\ell}(\mu)  \Theta(k, \mu, \eta_{R}) \\
+  \frac{1}{(-i)^{\ell}} \int_{-1}^{1}  \frac{d\mu}{2} P_{\ell}(\mu)  e^{ik \mu (\eta - \eta_{R}) } &=& j_{\ell}[k(\eta-\eta_{R})]
+\ea
+
+\ba
+  \Theta_{\ell}(k, \eta_{R})   &=& \int_{0}^{\eta_{R}} d\eta g(\eta) \left[ \Theta_{0}(k,\eta) + \psi(k,\eta) \right]  j_{\ell}[k(\eta-\eta_{R})] \\
+   &- & \frac{i}{k} \int_{0}^{\eta_{R}} d\eta    g(\eta) u_{b} (k,\eta)    \frac{d}{d\eta}  j_{\ell}[k(\eta-\eta_{R})]   \\
+   &+&  \int_{0}^{\eta_{R}} d\eta e^{- \tau(\eta)} \left[\psi'(k,\eta) - \phi'(k,\eta)   \right]  j_{\ell}[k(\eta-\eta_{R})]  \\
+         \ea
+
+
+\ba
+{\cal R}(\bm k) {\cal T}_{\ell}(k)&=& \int_{0}^{\eta_{R}} d\eta g(\eta) \left[ \Theta_{0}(k,\eta) + \psi(k,\eta) \right]  j_{\ell}[k(\eta-\eta_{R})] \\
+   &- & \frac{i}{k} \int_{0}^{\eta_{R}} d\eta    g(\eta) u_{b} (k,\eta)    \frac{d}{d\eta}  j_{\ell}[k(\eta-\eta_{R})]   \\
+   &+&  \int_{0}^{\eta_{R}} d\eta e^{- \tau(\eta)} \left[\psi'(k,\eta) - \phi'(k,\eta)   \right]  j_{\ell}[k(\eta-\eta_{R})]  \\
+         \ea
+         
+ 
+ \ba
+ {\cal T}_{\ell}(k)&\propto& \int_{0}^{\eta_{R}} d\eta g(\eta) \left[ \Theta_{0}(k,\eta) + \psi(k,\eta) \right]  j_{\ell}[k(\eta-\eta_{R})] \\
+   &- & \frac{i}{k} \int_{0}^{\eta_{R}} d\eta    g(\eta) u_{b} (k,\eta)    \frac{d}{d\eta}  j_{\ell}[k(\eta-\eta_{R})]   \\
+   &+&  \int_{0}^{\eta_{R}} d\eta e^{- \tau(\eta)} \left[\psi'(k,\eta) - \phi'(k,\eta)   \right]  j_{\ell}[k(\eta-\eta_{R})]  \\
+         \ea
+
+
+\ba
+\Theta  |_{\eta_{R}} = \int_{0}^{\eta_{R}} d\eta g(\eta) \left[\left(\Theta_{0}+ \psi \right)  + \bm{e}{\bm u_{b}}  \right] + \int_{0}^{\eta_{R}} d\eta \exp(-\tau)  (\dot{\psi} - \dot{\phi})   \\
+\ea
+
+\ba
+\ell^{*}_{n} \sim n \frac{\pi}{\theta{*}}
+\ea
+\ba
+\theta^{*} = \frac{r^{*}_{s}}{D_{A}^{*}}
+\ea
+
+\ba
+r^{*}_{s} &=& \int_{0}^{t^{*}} \frac{dt}{a(t)} c_{s}(t) \\
+ 	     &=& \int_{z^{*}}^{\infty} \frac{dz}{H(z)} c_{s}(z) \\
+	     &=& \int_{z^{*}}^{\infty} \frac{dz}{H(z)} \sqrt{\frac{1}{3\left[1+ \frac{3\rho_{b}}{4\rho_{\gamma}} \right]}} \\
+\ea
+
+\ba
+\rho_{b} \nearrow, \ \ c_{s} \searrow, \ \  r^{*}_{s} \searrow, \ \  \theta^{*} \searrow,  \ \  \ell^{*}_{n}  \nearrow
+\ea
+
+\ba
+\lambda_{\rm MFP, physical} = (n_{e} \sigma_{T})^{-1} \\
+\lambda_{MFP, physical} =  a \lambda_{MFP}  \\\\
+\lambda_{\rm MFP, comoving} = (a n_{e} \sigma_{T})^{-1}
+\ea
+
+
+\ba
+\lambda_{D} \sim \lambda_{\rm MFP, comoving} \sqrt{n_{e} \sigma_{T} H^{-1}}= \frac{1}{\sqrt{n_{e} \sigma_{T} H}}\frac{1}{a}
+\ea
+
+\ba
+\lambda_{D} \sim  \frac{1}{\sqrt{n_{e} \sigma_{T} H}}\frac{1}{a}
+\ea
+
+\ba
+n_{e} \propto \rho_{b}
+\ea
+
+\ba
+\rho_{b} \nearrow , \ \ n_{e} \nearrow, \ \ \lambda_{D} \searrow, \ \ \theta_{D} \searrow, \ \  \ell_{D}  \nearrow
+\ea
+
+\ba
+\blue{\theta_{D}}
+\ea
+
+\ba
+\theta_{D} \propto \frac{\lambda_{D}}{D_{A}^{*}}
+\ea
+
+
+\ba
+\ell_{D} \propto \frac{\pi}{\theta_{D}}
+\ea
+
+\ba
+\ell > \ell_{D}
+\ea
+
+\ba
+\red{\lambda_{\rm MFP}}
+\ea
+
+\ba
+\delta_{c}, \delta_{b}
+\ea
+
+\ba
+u_{c}, u_{b}
+\ea
+
+\ba
+a = \frac{1}{1+z} \\
+\frac{da}{dz} =  \frac{-1}{(1+z)^{2}}
+\ea
+
+\ba
+d\eta = \frac{dt}{a} = \frac{da}{a}\frac{dt}{da}  = \frac{da}{Ha^{2}} = \frac{da}{dz}\frac{(1+z^{2})}{H} = - \frac{dz}{H} 
+\ea
+
+\ba
+\eta
+\ea
+
+\ba
+a(\bm{x},t) = a(t) \sqrt{1 + 2 \phi(\bm{x},t) }
+\ea
+
+\ba
+\phi, \psi \sim 10^{-4}
+\ea
+
+\ba
+\frac{\delta{T}}{T} \sim 10^{-5} \\
+\frac{\delta{P}}{T} \sim 10^{-6}
+\ea
+
+\ba
+\zeta(3) \sim 1.202
+\ea
+
+\ba
+v_{\rm b}  (\bm{x}, t) \\
+v_{\rm cdm}  (\bm{x}, t)
+\ea
+
+\ba
+\rho_{\rm cdm} (\bm{x}, t) &=& \bar{\rho}_{\rm cdm} (t) ( 1 + \delta_{\rm cdm} (\bm{x}, t)) \\
+\rho_{\rm b} (\bm{x}, t) &=& \bar{\rho}_{\rm b} (t) ( 1 + \delta_{\rm b} (\bm{x}, t))
+\ea
+
+\ba
+P(a) = \frac{1}{\sigma \sqrt{2\pi}} \exp - \frac{1}{2} \left( \frac{a-\mu}{\sigma} \right)^{2}
+\ea
+
+\ba
+P(\bm{a}) = \frac{1}{(2\pi)^{N/2} \sigma^{N}} \exp - \frac{1}{2} \sum^{N}_{i=1} \left( \frac{a_{i}-\mu}{\sigma} \right)^{2}
+\ea
+
+\ba
+P(\bm{a}) = \frac{1}{(2\pi)^{N/2} \det (\Sigma)^\frac{1}{2}} \exp \left[- \frac{1}{2}  \sum^{N}_{i=1} \sum^{N}_{j=1}  \left(a_{i}-\mu_{i} \right) (\Sigma^{-1})_{ij} \left(a_{j}-\mu_{j} \right) \right]
+\ea
+
+\ba
+\Sigma_{ij} = \langle \left(a_{i}-\mu_{i} \right) \left(a_{j}-\mu_{j} \right) \rangle
+\ea
+
+\ba
+P(\bm{\delta_{\rm cdm}}) = \frac{1}{(2\pi)^{N/2} \det (\Sigma)^\frac{1}{2}} \exp \left[- \frac{1}{2}  \sum^{N}_{i=1} \sum^{N}_{j=1}  \left(\delta_{\rm cdm, i} \right) (\Sigma^{-1})_{ij} \left(\delta_{\rm cdm, j} \right) \right]
+\ea
+
+\ba
+\delta_{\rm cdm, i} = \delta_{\rm cdm}(\bm{x}_{i})
+\ea
+
+\ba
+\Sigma_{ij} = \langle \delta_{\rm cdm}(\bm{x}_{i}) \delta_{\rm cdm}(\bm{x}_{j}) \rangle
+\ea
+
+
+\ba
+\Sigma_{ij} = \langle \delta_{\rm cdm}(\bm{x}_{i}) \delta_{\rm cdm}(\bm{x}_{j}) \rangle = \xi( \bm{x}_{i}-\bm{x}_{j}) 
+\ea
+
+\ba
+\Sigma_{ij} = \langle \delta_{\rm cdm}(\bm{x}_{i}) \delta_{\rm cdm}(\bm{x}_{j}) \rangle =  \xi( |\bm{x}_{i}-\bm{x}_{j} |) =  \xi(r)
+\ea
+
+\ba
+\blue{\delta_{\rm cdm}(\bm{x}_{3})},  \blue{\delta_{\rm cdm}(\bm{x}_{4})}
+\ea
+
+\ba
+\red{\delta_{\rm cdm}(\bm{x}_{5})},  \red{\delta_{\rm cdm}(\bm{x}_{6})}
+\ea
+
+
+\ba
+ \xi(r) = \langle \delta(\bm{x}_{i}) \delta(\bm{x}_{i} + \bm{r})  \rangle \\
+P(k)  = \langle \delta(\bm{k}) \delta^{*}(\bm{k})  \rangle 
+\ea
+
+\ba
+\delta_{X} (k, t) = T(k, t) \delta_{X} (k, t_{\rm ini})
+\ea
+
+\ba
+{\bm x}_{\rm true} = ({\bm \theta_{S}}, 1) \chi_{\rm CMB} \\
+\blue{{\bm x}_{\rm obs} = ({\bm \theta}, 1) \chi_{\rm CMB}}
+\ea
+
+\end{document}
+
+
+
